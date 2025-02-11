@@ -40,17 +40,17 @@ class AuthController extends Controller
         ]);
         if ($user) {
             if ($user->trashed()) {
-                return redirect()->route('client.login.form')->with('error', __('message.delete_user_trashed'))->withInput();
+                return redirect()->route('login')->with('error', __('message.delete_user_trashed'))->withInput();
             }
             if (Auth::guard('web')->attempt(['email' => $email, 'password' => $password])) {
                 return redirect()->route('index');
             } else {
-                return redirect()->route('console.login.form')->withErrors([
+                return redirect()->route('login')->withErrors([
                     'email' => __('message.error_email_or_pass')
                 ])->withInput();
             }
         } else {
-            return redirect()->route('client.login.form')->withErrors([
+            return redirect()->route('login')->withErrors([
                 'email' => __('message.error_email_or_pass')
             ])->withInput();
         }

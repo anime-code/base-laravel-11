@@ -44,7 +44,7 @@ class AuthController extends Controller
             }
 
             if (Auth::guard('console')->attempt(['email' => $email, 'password' => $password])) {
-                return redirect()->route('dashboard');
+                return redirect()->route('console.dashboard');
             } else {
                 return redirect()->route('console.login.form')->withErrors([
                     'email' => __('message.error_email_or_pass')
